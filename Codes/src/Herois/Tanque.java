@@ -1,0 +1,27 @@
+package Herois;
+
+import Entidades.Entidade;
+import Monstros.Monstro;
+
+import java.util.List;
+
+public class Tanque extends Humano{
+    //========== CONSTRUTOR ==========
+    public Tanque(String nome){
+        super(nome, "Tanque", 200, 15, 20, 0, 10, 2);
+    }
+
+    //========== HABILIDADE ESPECIAL ==========
+    @Override
+    public void habilidadeEspecial(List<Entidade> entidadesEmCombate){
+        //Taunt nos monstros
+        if (!this.estaVivo())
+            return;
+
+    }
+
+    @Override
+    public int getCooldownMaximo() {
+        return 2;
+    }
+}
