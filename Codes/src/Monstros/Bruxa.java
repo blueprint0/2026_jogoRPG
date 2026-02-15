@@ -14,7 +14,7 @@ public class Bruxa extends Monstro{
 
     //========== CONSTRUTOR ==========
     public Bruxa(){
-        super("Bruxa", "RARO", 100, 20, 5, 15, 15, 3, 20);
+        super("Bruxa", "RARO", 100, 20, 5, 15, 15, 20);
     }
 
     //==========  GETTERS  ==========
@@ -45,9 +45,7 @@ public class Bruxa extends Monstro{
     public void agir(Scanner scanner, List<Entidade> entidadesEmCombate) {
         if (!this.estaVivo())
             return;
-        var m = String.format("Vez da %s | Vida = %d", this.getNome(), this.getVida());
-        System.out.println(m);
-        j.esperar(1);
+        this.introduzir();
 
         int acoes = 2;
 

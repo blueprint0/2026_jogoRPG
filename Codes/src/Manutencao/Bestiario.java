@@ -27,7 +27,7 @@ public class Bestiario {
         monstrosRaros.add(Bruxa::new);
         //monstrosEpicos.add(Golem::new);
         //monstrosEpicos.add(Xama::new);
-        //monstrosEpicos.add(Vampiro::new);
+        monstrosEpicos.add(Vampiro::new);
 
     }
     //Ao usar o método get, ele executa a instrução e entrega o resultado, mas

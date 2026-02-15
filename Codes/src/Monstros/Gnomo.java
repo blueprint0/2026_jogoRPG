@@ -12,25 +12,18 @@ public class Gnomo extends Monstro{
 
     //========== CONSTRUTOR ==========
     public Gnomo(){
-        super("Gnomo", "COMUM", 80, 10, 5, 5, 10, 2, 10);
+        super("Gnomo", "COMUM", 80, 10, 5, 5, 10, 10);
         //nome, tipo, vida, ataque, defesa, cura,  velocidade
     }
 
-    //========== HABILIDADE ESPECIAL ==========
-    @Override
-    public void habilidadeEspecial(List<Entidade> entidadesEmCombate) {
-
-        this.diminuirCooldown();
-    }
 
     @Override
     public void agir(Scanner scanner, List<Entidade> entidadesEmCombate) {
         if(!this.estaVivo())
             return;
-        var m = String.format("Vez do %s | Vida = %d", this.getNome(), this.getVida());
-        System.out.println(m);
-        j.esperar(1);
+        this.introduzir();
 
+        this.diminuirCooldown();
     }
 
     @Override
@@ -39,16 +32,29 @@ public class Gnomo extends Monstro{
     }
 
     public void receberDano(int dano){
-        if (Math.random() < 0.2) {
-            System.out.printf("\n%s É baixinho e desviou do ataque!!", this.getNome());
-        }else {
-            if(this.vida - dano <= 0){
-                this.vida = 0;
-            }
-            else{
-                this.vida -= dano;
-            }
+        if (Math.random() < 0.2){
+            System.out.println("O Gnomo é baixinho e desviou do ataque!");
+            return;
         }
+
+        String m = String.format("\u001B[31m%s sofreu %d de dano!!\u001B[0m", this.getNome(), dano);
+        System.out.println(m);
+
+        if(this.vida - dano <= 0){
+            this.vida = 0;
+            var mensagem = String.format("☠️ %s morreu!!", this.getNome());
+            System.out.println(mensagem);
+        }
+        else{
+            this.vida -= dano;
+        }
+    }
+
+    //========== HABILIDADE ESPECIAL ==========
+    @Override
+    public void habilidadeEspecial(List<Entidade> entidadesEmCombate) {
+
+        this.resetarCooldown();
     }
 
 }

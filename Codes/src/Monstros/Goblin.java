@@ -12,7 +12,7 @@ public class Goblin extends Monstro{
 
     //========== CONSTRUTOR ==========
     public Goblin (){
-        super("Goblin", "COMUM", 80, 10, 5, 5, 20, 3, 30);
+        super("Goblin", "COMUM", 80, 10, 5, 5, 20, 30);
     }
 
     //========== HABILIDADE ESPECIAL ==========
@@ -26,9 +26,7 @@ public class Goblin extends Monstro{
     public void agir(Scanner scanner, List<Entidade> entidadesEmCombate) {
         if(!this.estaVivo())
             return;
-        var m = String.format("Vez do %s | Vida = %d", this.getNome(), this.getVida());
-        System.out.println(m);
-        j.esperar(1);
+        this.introduzir();
     }
 
     @Override

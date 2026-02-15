@@ -8,7 +8,7 @@ import java.util.List;
 public class Tanque extends Humano{
     //========== CONSTRUTOR ==========
     public Tanque(String nome){
-        super(nome, "Tanque", 200, 15, 20, 0, 10, 2);
+        super(nome, "Tanque", 200, 20, 15, 0, 10);
     }
 
     //========== HABILIDADE ESPECIAL ==========

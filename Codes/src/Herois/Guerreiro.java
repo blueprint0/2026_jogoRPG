@@ -11,13 +11,13 @@ public class Guerreiro extends Humano{
 
     //========== CONSTRUTOR ==========
     public Guerreiro (String nome){            //variáveis que mudam independente de serem Guerreiro
-        super(nome, "Guerreiro", 120, 20, 10, 0, 25, 2); //variáveis fixas para os Guerreiros
+        super(nome, "Guerreiro", 120, 30, 10, 0, 25); //variáveis fixas para os Guerreiros
     }
 
     //========== HABILIDADE ESPECIAL  ==========
     @Override
     public void habilidadeEspecial(List<Entidade> entidadesEmCombate){
-        String texto = String.format("🔥\u001B[31m%s usou o ataque giratório!!\u001B[0m", nome);
+        String texto = String.format("⚔️\u001B[31m%s usou o ataque giratório!!\u001B[0m", nome);
         System.out.println(texto);
         j.esperar(1);
 

@@ -1,10 +1,7 @@
 package Manutencao;
 
 import Entidades.Entidade;
-import Herois.Curador;
-import Herois.Humano;
-import Herois.Guerreiro;
-import Herois.Tanque;
+import Herois.*;
 import Monstros.*;
 import Main.*;
 
@@ -37,7 +34,6 @@ public class Jogo{
     public void passarRodada() {
         System.out.println("Fim da rodada " +  rodadas++);
         esperar(1);
-        System.out.println("Começando a rodada " + rodadas);
     }
 
 
@@ -59,11 +55,11 @@ public class Jogo{
     }
     //3.
     public int escolherClasse(){
-        System.out.println("Escolha a classe do seu herói:\t[1]Guerreiro\t[2]Tanque\t[3]Curador");
+        System.out.println("Escolha a classe do seu herói:\t[1]Guerreiro\t[2]Tanque\t[3]Curador\t[4]Paladino");
         if (leitor.hasNextInt()){
             int escolha = leitor.nextInt();
             leitor.nextLine();
-            if (escolha >= 1 && escolha <= 3){
+            if (escolha >= 1 && escolha <= 4){
                 return escolha;
             }
             System.out.print("Número inválido! Digite novamente.");
@@ -79,6 +75,7 @@ public class Jogo{
             case 1 -> new Guerreiro(nome);
             case 2 -> new Tanque(nome);
             case 3 -> new Curador(nome);
+            case 4 -> new Paladino(nome);
             default -> {
                 System.out.println("Classe inválida! Não foi possível criar o herói.");
                 yield null; // Retorna nulo se a classe for inválida

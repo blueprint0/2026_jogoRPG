@@ -15,7 +15,7 @@ public class Esqueleto extends Monstro{
 
     //========== CONSTRUTOR ==========
     public Esqueleto(){
-        super("Esqueleto", "COMUM", 80, 17, 0, 5, 15, 2, 0);
+        super("Esqueleto", "COMUM", 80, 17, 0, 5, 15, 0);
     }
 
     //========== HABILIDADE ESPECIAL ==========
@@ -28,10 +28,11 @@ public class Esqueleto extends Monstro{
         alvosPossiveis.reversed();
         for (Entidade e : alvosPossiveis){
             if(e instanceof Humano && e.estaVivo()){
+                String m = String.format("O Esqueleto atacou %s ignorando sua armadura!!", e.getNome());
+                System.out.println(m);
                 int dano = 17 + rand.nextInt(16);
                 //Usando o método 'receberDano()' para ignorar a armadura
                 ((Humano) e).receberDano(dano);
-                String m = String.format("O Esqueleto atacou %s ignorando sua armadura! Causou %d de ano!!", ((Humano) e).getNome(),  dano);
                 j.esperar(1);
                 break;
             }
@@ -43,9 +44,7 @@ public class Esqueleto extends Monstro{
     public void agir(Scanner scanner, List<Entidade> entidadesEmCombate) {
         if (!this.estaVivo())
             return;
-        var m = String.format("Vez do %s | Vida = %d", this.getNome(), this.getVida());
-        System.out.println(m);
-        j.esperar(1);
+        this.introduzir();
 
         //Esqueleto ataca quem tem menor defesa
         List<Entidade> alvosPossiveis = new ArrayList<>(entidadesEmCombate);
@@ -67,6 +66,6 @@ public class Esqueleto extends Monstro{
 
     @Override
     public int getCooldownMaximo() {
-        return 0;
+        return 2;
     }
 }

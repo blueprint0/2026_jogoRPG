@@ -7,35 +7,34 @@ import Manutencao.Jogo;
 import java.util.*;
 
 public abstract class Humano extends Entidade {
-    protected String nome, classe;
-    protected int dinheiro;
+    protected String classe;
+    //Variáveis com valor de inicialização fixo (fora do construtor)
+    //protected int nivel = 0;
+    //protected int xp = 0;
+    //protected Enum estados (congelado, queimando, envenenado)
+    protected int dinheiro = 0;
+    //Escudo extra do Paladino
+    protected int escudoExtra = 0;
 
     Random rand = new Random();
     Jogo j = new Jogo();
 
     //==========  CONSTRUTOR  ==========
-    public Humano (String nome, String classe, int vida, int ataque, int defesa, int cura, int velocidade, int cooldownAtual){
-        super(vida, ataque, defesa, cura, velocidade, cooldownAtual);
-        //Apenas de Humanos:
-        this.nome = nome;
+    public Humano (String nome, String classe, int vida, int ataque, int defesa, int cura, int velocidade){
+        super(nome, vida, ataque, defesa, cura, velocidade);
+        //Apenas de Humanos, que variam para cada instância:
         this.classe = classe;
-        this.dinheiro = 0;
     }
 
     //==========  GETTERS  ==========
-    public String getNome(){return this.nome;}
     public String getClasse(){return this.classe;}
     public int getDinheiro(){return this.dinheiro;}
+    public int getEscudoExtra(){return this.escudoExtra;}
 
     //==========  SETTERS  ==========
-    public void setNome(String nome){this.nome = nome;}
     public void setClasse(String classe){this.classe = classe;}
-    public void setVida(int vida){this.vida = vida;}
-    public void setAtaque(int ataque){this.ataque = ataque;}
-    public void setDefesa(int defesa){this.defesa = defesa;}
-    public void setCura(int cura){this.cura = cura;}
-    public void setVelocidade(int velocidade){this.velocidade = velocidade;}
     public void setDinheiro(int dinheiro){this.dinheiro = dinheiro;}
+    public void setEscudoExtra(int escudoExtra){this.escudoExtra = escudoExtra;}
 
     //==========  MÉTODOS DE STATUS  ==========
     public void mostrarStatus(){
@@ -63,7 +62,9 @@ public abstract class Humano extends Entidade {
 
         while (!inputValido){
             try {
-                System.out.printf("Vez de: %s | Vida = %d| CD = %d\n",this.getNome(), this.getVida(), this.getCooldownAtual());
+                var m = String.format("\n🔵 Turno de: %s | Vida = %d| CD = %d",this.getNome(), this.getVida(), this.getCooldownAtual());
+                System.out.println(m);
+                j.esperar(1);
                 System.out.println("Escolha sua ação:\t[1]Atacar\t[2]Se curar\t[3]Curar aliado\t[4]Habilidade especial");
                 if (leitor.hasNextInt()){
                     int acao = leitor.nextInt();
@@ -139,18 +140,33 @@ public abstract class Humano extends Entidade {
 
     //==========  MÉTODOS DE DANO  ==========
     public void atacar(Monstro monstro){
+        var m = String.format("%s atacou %s!", this.getNome(), monstro.getNome());
+        System.out.println(m);
         int dano = causarDano(monstro);
         monstro.receberDano(dano);
-        String mensagem = String.format("\u001B[31m%s causou %d de dano em %s!!!\u001B[0m", nome, dano, monstro.getNome());
-        System.out.println(mensagem);
     }
     public int causarDano(Monstro monstro){
-        int danoBruto = ataque + rand.nextInt(16);
+        int danoBruto = this.getAtaque() + rand.nextInt(16);
         return Math.max(0, danoBruto - monstro.getDefesa());
     }
     public void receberDano(int dano){
+        //Escudo extra do Paladino
+        if (this.getEscudoExtra() > 0){
+            int danoEscudo = dano;
+            dano = Math.max(0, dano - this.getEscudoExtra());
+            if (dano > 0)
+                System.out.println("O escudo absorveu parte do dano!");
+            else
+                System.out.println("O escudo absorveu todo o dano!!");
+            this.setEscudoExtra(Math.max(0, this.getEscudoExtra() - danoEscudo));
+        }
+
+        String mensagem = String.format("\u001B[31m%s sofreu %d de dano!!\u001B[0m", this.getNome(), dano);
+        System.out.println(mensagem);
         if (this.vida - dano <= 0) {
             this.vida = 0;
+            var m = String.format("☠️ %s morreu!!", this.getNome());
+            System.out.println(m);
         }
         else  {
             this.vida -= dano;

@@ -2,58 +2,68 @@ package Monstros;
 
 import Entidades.Entidade;
 import Herois.Humano;
+import Manutencao.Jogo;
 
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 public abstract class Monstro extends Entidade {
-    protected String nome, tipo;
+    protected String tipo;
     protected int dinheiroDrop;
 
+    Jogo j = new Jogo();
     Random rand = new Random();
 
     //==========  CONSTRUTOR  ==========
-    public Monstro (String nome, String tipo, int vida, int ataque, int defesa, int cura, int velocidade, int cooldownAtual, int dinheiroDrop){
-        super(vida, ataque, defesa, cura, velocidade, cooldownAtual);
-        //Apenas de Monstros:
-        this.nome = nome;
+    public Monstro (String nome, String tipo, int vida, int ataque, int defesa, int cura, int velocidade, int dinheiroDrop){
+        super(nome, vida, ataque, defesa, cura, velocidade);
+        //Apenas de Monstros, que variam para cada instância:
         this.tipo = tipo;
         this.dinheiroDrop = dinheiroDrop;
     }
 
     //==========  GETTERS  ==========
-    public String getNome(){return this.nome;}
     public String getTipo(){return this.tipo;}
+    public int getDinheiroDrop(){return this.dinheiroDrop;}
 
     //==========  SETTERS  ==========
-    public void setNome(String nome){this.nome = nome;}
-    public void setVida(int vida){this.vida = vida;}
-    public void setAtaque(int ataque){this.ataque = ataque;}
-    public void setDefesa(int defesa){this.defesa = defesa;}
-    public void setCura(int cura){this.cura = cura;}
-    public void setVelocidade(int velocidade){this.velocidade = velocidade;}
+    public void setTipo(String tipo){this.tipo = tipo;}
+    public void setDinheiroDrop(int dinheiro){this.dinheiroDrop = dinheiro;}
+
     //==========  MÉTODOS DE STATUS  ==========
     public void mostrarStatus(){
         String status = String.format("%s: Vida = %d", nome, vida);
         System.out.println(status);
     }
 
+    //========== MÉTODOS DE CONTROLE ==========
+    public void introduzir(){
+        var mensagem = String.format("\n🔴 Turno de: %s | Vida = %d", this.getNome(), this.getVida());
+        System.out.println(mensagem);
+        j.esperar(1);
+    }
+
     //==========  MÉTODOS DE DANO  ==========
     public void atacar(Humano humano){
+        var m = String.format("%s atacou %s!!", this.getNome(), humano.getNome());
+        System.out.println(m);
         int dano = causarDano(humano);
         humano.receberDano(dano);
-        String mensagem = String.format("\u001B[31m%s causou %d de dano em %s!!!\u001B[0m", nome, dano, humano.getNome());
-        System.out.println(mensagem);
+
     }
     public int causarDano(Humano humano){
-        int danoBruto = ataque + rand.nextInt(16);
-        int danoReal = Math.max(0, danoBruto - humano.getDefesa());
-        return danoReal;
+        int danoBruto = this.getAtaque() + rand.nextInt(16);
+        return Math.max(0, danoBruto - humano.getDefesa());
     }
     public void receberDano(int dano){
+        String m = String.format("\u001B[31m%s sofreu %d de dano!!\u001B[0m", this.getNome(), dano);
+        System.out.println(m);
+
         if(this.vida - dano <= 0){
             this.vida = 0;
+            var m2 = String.format("☠️ %s morreu!!", this.getNome());
+            System.out.println(m2);
         }
         else{
             this.vida -= dano;

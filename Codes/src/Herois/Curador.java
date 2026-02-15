@@ -8,7 +8,7 @@ import java.util.List;
 public class Curador extends Humano{
     //========== CONSTRUTOR ==========
     public Curador(String nome){
-        super(nome, "Curador", 100, 10, 5, 25, 20, 4);
+        super(nome, "Curador", 100, 15, 5, 25, 20);
     }
 
     @Override
