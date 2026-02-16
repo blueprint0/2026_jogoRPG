@@ -175,6 +175,11 @@ public abstract class Humano extends Entidade {
 
     //==========  MÉTODOS DE CURA  ==========
     public void seCurar(){
+        if (this.getVidaMaxima() == this.getVida()){
+            System.out.println("Você já está com a vida máxima!");
+            return;
+        }
+
         int cura = calcularCura();
         vida += cura;
         String mensagem = String.format("\u001B[32m%s se curou %d de vida!\u001B[0m", nome, cura);
@@ -184,6 +189,11 @@ public abstract class Humano extends Entidade {
         return this.cura + rand.nextInt(16);
     }
     public void curarAliado(Humano h){
+        if (h.getVidaMaxima() == h.getVida()){
+            System.out.println(h.getNome() + " já está com a vida máxima!");
+            return;
+        }
+
         int cura = calcularCura();
         h.setVida(h.getVida() + cura);
         String mensagem = String.format("\u001B[32m%s curou %d pontos de vida de %s!!\u001B[0m", this.getNome(), cura, h.getNome());

@@ -14,7 +14,7 @@ public class Vampiro extends Monstro{
 
     //========== CONSTRUTOR ==========
     public Vampiro(){
-        super("Vampiro", "EPICO", 150, 30, 10, 0, 35, 40);
+        super("Vampiro", "EPICO", 120, 30, 10, 0, 35, 40);
     }
 
     //========== MÉTODOS DE COMBATE ==========
@@ -51,8 +51,6 @@ public class Vampiro extends Monstro{
                 }
             }
         }
-        System.out.println("Defesa: " + this.getDefesa());
-        System.out.println("ATK: " + this.getAtaque());
     }
 
     @Override

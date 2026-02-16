@@ -8,7 +8,7 @@ public class Paladino extends Humano{
 
     //========== CONSTRUTOR ==========
     public Paladino(String nome){
-        super(nome, "Paladino", 120, 25, 20, 0, 25);
+        super(nome, "Paladino", 110, 25, 20, 0, 25);
     }
 
     @Override
@@ -25,6 +25,6 @@ public class Paladino extends Humano{
 
     @Override
     public int getCooldownMaximo() {
-        return 3;
+        return 5;
     }
 }

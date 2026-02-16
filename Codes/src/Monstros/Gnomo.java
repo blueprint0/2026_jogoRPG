@@ -1,8 +1,11 @@
 package Monstros;
 
 import Entidades.Entidade;
+import Herois.Humano;
 import Manutencao.Jogo;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,14 +19,35 @@ public class Gnomo extends Monstro{
         //nome, tipo, vida, ataque, defesa, cura,  velocidade
     }
 
+    //========== HABILIDADE ESPECIAL ==========
+    @Override
+    public void habilidadeEspecial(List<Entidade> entidadesEmCombate) {
+
+        this.resetarCooldown();
+    }
 
     @Override
     public void agir(Scanner scanner, List<Entidade> entidadesEmCombate) {
-        if(!this.estaVivo())
+        if (!this.estaVivo())
             return;
         this.introduzir();
 
-        this.diminuirCooldown();
+        //Zumbi ataca humano aleatório
+        List<Entidade> alvosPossiveis = new ArrayList<>(entidadesEmCombate);
+        Collections.shuffle(alvosPossiveis);
+
+        for (Entidade e : alvosPossiveis) {
+            if (e instanceof Humano && e.estaVivo()){
+                if (this.getCooldownAtual() == 0)
+                    this.habilidadeEspecial(alvosPossiveis);
+                else{
+                    this.atacar((Humano) e);
+                    this.diminuirCooldown();
+                }
+                break;
+            }
+        }
+        j.esperar(1);
     }
 
     @Override
@@ -50,11 +74,5 @@ public class Gnomo extends Monstro{
         }
     }
 
-    //========== HABILIDADE ESPECIAL ==========
-    @Override
-    public void habilidadeEspecial(List<Entidade> entidadesEmCombate) {
-
-        this.resetarCooldown();
-    }
 
 }

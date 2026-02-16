@@ -23,7 +23,7 @@ public class Bestiario {
         monstrosComuns.add(Esqueleto::new);
         monstrosComuns.add(Gnomo::new);
         monstrosComuns.add(Zumbi::new);
-        monstrosComuns.add(Goblin::new);
+        //monstrosComuns.add(Goblin::new);
         monstrosRaros.add(Bruxa::new);
         //monstrosEpicos.add(Golem::new);
         //monstrosEpicos.add(Xama::new);

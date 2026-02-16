@@ -25,7 +25,7 @@ public class Esqueleto extends Monstro{
         System.out.println("Esqueleto usou a habilidade especial!");
         j.esperar(1);
         //Ordena por maior defesa
-        alvosPossiveis.reversed();
+        alvosPossiveis = alvosPossiveis.reversed();
         for (Entidade e : alvosPossiveis){
             if(e instanceof Humano && e.estaVivo()){
                 String m = String.format("O Esqueleto atacou %s ignorando sua armadura!!", e.getNome());

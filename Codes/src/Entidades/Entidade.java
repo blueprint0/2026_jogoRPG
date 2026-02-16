@@ -10,6 +10,7 @@ public abstract class Entidade {
 
     //Variáveis comuns para Entidades mas com valor fixo
     protected int cooldownAtual = this.getCooldownMaximo();
+    protected int vidaMaxima;
 
     //========== CONSTRUTOR ==========
     public Entidade(String nome, int vida, int ataque, int defesa, int cura, int velocidade) {
@@ -19,6 +20,8 @@ public abstract class Entidade {
         this.defesa = defesa;
         this.cura = cura;
         this.velocidade = velocidade;
+
+        this.vidaMaxima = vida;
     }
 
     //==========  GETTERS  ==========
@@ -29,6 +32,7 @@ public abstract class Entidade {
     public int getCura(){return this.cura;}
     public int getVelocidade(){return this.velocidade;}
     public int getCooldownAtual(){return this.cooldownAtual;}
+    public int getVidaMaxima(){return this.vidaMaxima;}
 
     //========== SETTERS ==========
     public void setNome(String nome){this.nome = nome;}
@@ -38,6 +42,7 @@ public abstract class Entidade {
     public void setCura(int cura){this.cura = cura;}
     public void setVelocidade(int velocidade){this.velocidade = velocidade;}
     public void setCooldownAtual(int cooldownAtual){this.cooldownAtual = cooldownAtual;}
+    public void setVidaMaxima(int vidaMaxima){this.vidaMaxima = vidaMaxima;}
 
     //========== MÉTODOS ABSTRATOS ==========
     public abstract void agir(Scanner scanner, List<Entidade> entidadesEmCombate);
