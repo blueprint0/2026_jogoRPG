@@ -2,6 +2,7 @@ package Monstros;
 
 import Entidades.Entidade;
 import Herois.Humano;
+import Manutencao.Arena;
 import Manutencao.Jogo;
 
 import java.util.List;
@@ -16,11 +17,10 @@ public abstract class Monstro extends Entidade {
     Random rand = new Random();
 
     //==========  CONSTRUTOR  ==========
-    public Monstro (String nome, String tipo, int vida, int ataque, int defesa, int cura, int velocidade, int dinheiroDrop){
+    public Monstro (String nome, String tipo, int vida, int ataque, int defesa, int cura, int velocidade){
         super(nome, vida, ataque, defesa, cura, velocidade);
         //Apenas de Monstros, que variam para cada instância:
         this.tipo = tipo;
-        this.dinheiroDrop = dinheiroDrop;
     }
 
     //==========  GETTERS  ==========
@@ -64,6 +64,7 @@ public abstract class Monstro extends Entidade {
             this.vida = 0;
             var m2 = String.format("☠️ %s morreu!!", this.getNome());
             System.out.println(m2);
+            this.droparDinheiro();
         }
         else{
             this.vida -= dano;
@@ -86,6 +87,14 @@ public abstract class Monstro extends Entidade {
     //==========  MÉTODOS DE COMBATE  ==========
     public abstract void agir(Scanner leitor, List<Entidade> entidadesEmCombate);
     //Cada monstro vai ter uma IA própria
+
+    public void droparDinheiro(){
+        int dinheiroDropado = this.getDropDinheiro() + rand.nextInt(11);
+        //Interface.digitarFormatado("%s deixou %d de dinheiro ao morrer!"this.getNome(), dinheiroDropado);
+        j.arena.depositarDinheiro(dinheiroDropado);
+    };
+
+    public abstract int getDropDinheiro();
 
     //==========  MÉTODO VAZIO (HABILIDADE ESPECIAL)  ==========
     public abstract void habilidadeEspecial(List<Entidade> e);

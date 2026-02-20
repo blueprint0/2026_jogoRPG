@@ -14,13 +14,18 @@ public class Bruxa extends Monstro{
 
     //========== CONSTRUTOR ==========
     public Bruxa(){
-        super("Bruxa", "RARO", 100, 20, 5, 15, 15, 20);
+        super("Bruxa", "RARO", 100, 20, 5, 15, 15);
     }
 
     //==========  GETTERS  ==========
     @Override
     public int getCooldownMaximo(){
         return 3;
+    }
+
+    @Override
+    public int getDropDinheiro() {
+        return 20;
     }
 
     //========== MÉTODOS DE COMBATE ==========

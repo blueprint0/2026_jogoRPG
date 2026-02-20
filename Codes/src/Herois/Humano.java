@@ -1,6 +1,7 @@
 package Herois;
 
 import Entidades.Entidade;
+import Manutencao.Arena;
 import Monstros.Monstro;
 import Manutencao.Jogo;
 
@@ -12,7 +13,7 @@ public abstract class Humano extends Entidade {
     //protected int nivel = 0;
     //protected int xp = 0;
     //protected Enum estados (congelado, queimando, envenenado)
-    protected int dinheiro = 0;
+
     //Escudo extra do Paladino
     protected int escudoExtra = 0;
 
@@ -28,12 +29,10 @@ public abstract class Humano extends Entidade {
 
     //==========  GETTERS  ==========
     public String getClasse(){return this.classe;}
-    public int getDinheiro(){return this.dinheiro;}
     public int getEscudoExtra(){return this.escudoExtra;}
 
     //==========  SETTERS  ==========
     public void setClasse(String classe){this.classe = classe;}
-    public void setDinheiro(int dinheiro){this.dinheiro = dinheiro;}
     public void setEscudoExtra(int escudoExtra){this.escudoExtra = escudoExtra;}
 
     //==========  MÉTODOS DE STATUS  ==========
@@ -47,7 +46,7 @@ public abstract class Humano extends Entidade {
         System.out.println(status);
     }
     public void mostrarDinheiro(){
-        String status = String.format("\u001B[33mDinheiro: %d\u001B[0m", dinheiro);
+        String status = String.format("\u001B[33mDinheiro: %d\u001B[0m", Arena.getDinheiroCompartilhado());
         System.out.println(status);
 
     }

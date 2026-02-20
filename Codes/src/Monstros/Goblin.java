@@ -12,7 +12,7 @@ public class Goblin extends Monstro{
 
     //========== CONSTRUTOR ==========
     public Goblin (){
-        super("Goblin", "COMUM", 80, 10, 5, 5, 20, 30);
+        super("Goblin", "COMUM", 80, 10, 5, 5, 20);
     }
 
     //========== HABILIDADE ESPECIAL ==========
@@ -27,6 +27,11 @@ public class Goblin extends Monstro{
         if(!this.estaVivo())
             return;
         this.introduzir();
+    }
+
+    @Override
+    public int getDropDinheiro() {
+        return 30;
     }
 
     @Override

@@ -15,7 +15,7 @@ public class Esqueleto extends Monstro{
 
     //========== CONSTRUTOR ==========
     public Esqueleto(){
-        super("Esqueleto", "COMUM", 80, 17, 0, 5, 15, 0);
+        super("Esqueleto", "COMUM", 80, 17, 0, 5, 15);
     }
 
     //========== HABILIDADE ESPECIAL ==========
@@ -62,6 +62,11 @@ public class Esqueleto extends Monstro{
             }
         }
         j.esperar(1);
+    }
+
+    @Override
+    public int getDropDinheiro() {
+        return 2;
     }
 
     @Override

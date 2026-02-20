@@ -14,7 +14,7 @@ public class Zumbi extends Monstro{
 
     //========== CONSTRUTOR ==========
     public Zumbi(){
-        super("Zumbi", "COMUM", 50, 25, 8, 0, 10, 5);
+        super("Zumbi", "COMUM", 50, 25, 8, 0, 10);
     }
 
     //========== GETTERS ==========
@@ -72,6 +72,11 @@ public class Zumbi extends Monstro{
             }
         }
         j.esperar(1);
+    }
+
+    @Override
+    public int getDropDinheiro() {
+        return 5;
     }
 
     @Override

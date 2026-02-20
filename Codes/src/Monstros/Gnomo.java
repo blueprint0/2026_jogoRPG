@@ -2,6 +2,7 @@ package Monstros;
 
 import Entidades.Entidade;
 import Herois.Humano;
+import Manutencao.Arena;
 import Manutencao.Jogo;
 
 import java.util.ArrayList;
@@ -11,11 +12,12 @@ import java.util.Scanner;
 
 public class Gnomo extends Monstro{
 
+    Arena arena = new Arena();
     Jogo j = new Jogo();
 
     //========== CONSTRUTOR ==========
     public Gnomo(){
-        super("Gnomo", "COMUM", 80, 10, 5, 5, 10, 10);
+        super("Gnomo", "COMUM", 80, 10, 5, 5, 10);
         //nome, tipo, vida, ataque, defesa, cura,  velocidade
     }
 
@@ -51,6 +53,11 @@ public class Gnomo extends Monstro{
     }
 
     @Override
+    public int getDropDinheiro() {
+        return 10;
+    }
+
+    @Override
     public int getCooldownMaximo() {
         return 2;
     }
@@ -68,6 +75,7 @@ public class Gnomo extends Monstro{
             this.vida = 0;
             var mensagem = String.format("☠️ %s morreu!!", this.getNome());
             System.out.println(mensagem);
+            this.droparDinheiro();
         }
         else{
             this.vida -= dano;

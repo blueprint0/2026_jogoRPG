@@ -17,6 +17,7 @@ public class Jogo{
     public ArrayList<Humano> humanos = new ArrayList<>();
     public ArrayList<Monstro> monstrosEmCampo = new ArrayList<>();
     public ArrayList<Entidade> entidadesEmCombate = new ArrayList<>();
+    public Arena arena = new Arena();
 
     //Controle de rodadas e fim de jogo
     public boolean fimJogo;
@@ -32,6 +33,9 @@ public class Jogo{
     public void setRodadas(int rodadas) {this.rodadas = rodadas;}
 
     public void passarRodada() {
+        arena.pegarDinheiroArena();
+        arena.resetarDinheiroArena();
+
         System.out.println("Fim da rodada " +  rodadas++);
         esperar(1);
     }
@@ -111,7 +115,8 @@ public class Jogo{
             }
 
             case 5 -> {
-                //invasão na loja??
+                //Chamar função da loja
+                //humano.mostrarDinheiro
 
             }
             case 6 -> {
